@@ -123,7 +123,7 @@ export default function Home() {
   });
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8">
+    <main className="mx-auto w-full max-w-6xl px-4 py-8">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-slate-900">
           Client Project Tracker
@@ -156,12 +156,12 @@ export default function Home() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by client or project name…"
-            className="min-w-[200px] flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 sm:min-w-[200px] sm:flex-1"
           />
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
-            className="rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500 sm:w-auto"
           >
             <option value="All">All Priorities</option>
             {VALID_PRIORITIES.map((option) => (
