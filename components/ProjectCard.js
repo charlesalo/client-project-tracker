@@ -10,7 +10,7 @@ function formatDate(isoDate) {
   });
 }
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, onEdit }) {
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
       <p className="text-lg font-bold text-slate-900">{project.clientName}</p>
@@ -19,9 +19,18 @@ export default function ProjectCard({ project }) {
         <StatusBadge status={project.status} />
         <PriorityBadge priority={project.priority} />
       </div>
-      <p className="mt-3 text-xs text-slate-500">
-        Due {formatDate(project.dueDate)}
-      </p>
+      <div className="mt-3 flex items-center justify-between">
+        <p className="text-xs text-slate-500">
+          Due {formatDate(project.dueDate)}
+        </p>
+        <button
+          type="button"
+          onClick={() => onEdit(project)}
+          className="text-xs font-medium text-teal-700 hover:underline"
+        >
+          Edit
+        </button>
+      </div>
     </div>
   );
 }

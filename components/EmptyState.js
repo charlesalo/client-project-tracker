@@ -1,4 +1,4 @@
-export default function EmptyState() {
+export default function EmptyState({ onCreateClick }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-slate-300 px-6 py-16 text-center">
       <svg
@@ -21,6 +21,15 @@ export default function EmptyState() {
       <p className="mt-1 text-sm text-slate-500">
         Create your first project to get started.
       </p>
+      {onCreateClick && (
+        <button
+          type="button"
+          onClick={onCreateClick}
+          className="mt-4 rounded-md bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700"
+        >
+          Create Project
+        </button>
+      )}
     </div>
   );
 }
