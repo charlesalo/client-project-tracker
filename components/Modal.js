@@ -6,8 +6,6 @@ export default function Modal({ children, onClose, labelledBy }) {
   const contentRef = useRef(null);
 
   useEffect(() => {
-    contentRef.current?.focus();
-
     function handleKeyDown(e) {
       if (e.key === "Escape") {
         onClose();

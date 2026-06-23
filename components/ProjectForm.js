@@ -76,6 +76,7 @@ export default function ProjectForm({ project, onSubmit, onCancel }) {
         <input
           type="text"
           required
+          autoFocus
           value={formData.clientName}
           onChange={handleChange("clientName")}
           className={inputClass(errors.clientName)}

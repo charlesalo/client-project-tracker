@@ -7,6 +7,7 @@ import EmptyState from "@/components/EmptyState";
 import ErrorState from "@/components/ErrorState";
 import Modal from "@/components/Modal";
 import ProjectForm from "@/components/ProjectForm";
+import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 import { getProjects, saveProjects } from "@/lib/storage";
 import seedData from "@/data/test_data.json";
 
@@ -15,6 +16,7 @@ export default function Home() {
   const [status, setStatus] = useState("loading");
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingProject, setEditingProject] = useState(undefined);
+  const [deletingProject, setDeletingProject] = useState(undefined);
 
   const loadProjects = useCallback(() => {
     setTimeout(() => {
@@ -81,6 +83,28 @@ export default function Home() {
     setIsFormOpen(false);
   }
 
+  function openDeleteDialog(project) {
+    setDeletingProject(project);
+  }
+
+  function closeDeleteDialog() {
+    setDeletingProject(undefined);
+  }
+
+  function handleDeleteConfirm() {
+    const nextProjects = projects.filter((p) => p.id !== deletingProject.id);
+
+    setProjects(nextProjects);
+
+    try {
+      saveProjects(nextProjects);
+    } catch {
+      setStatus("error");
+    }
+
+    setDeletingProject(undefined);
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-4 py-8">
       <div className="flex items-center justify-between">
@@ -105,7 +129,11 @@ export default function Home() {
           <EmptyState onCreateClick={openCreateForm} />
         )}
         {status === "ready" && projects.length > 0 && (
-          <ProjectList projects={projects} onEdit={openEditForm} />
+          <ProjectList
+            projects={projects}
+            onEdit={openEditForm}
+            onDelete={openDeleteDialog}
+          />
         )}
       </div>
 
@@ -115,6 +143,16 @@ export default function Home() {
             project={editingProject}
             onSubmit={handleFormSubmit}
             onCancel={closeForm}
+          />
+        </Modal>
+      )}
+
+      {deletingProject && (
+        <Modal onClose={closeDeleteDialog} labelledBy="delete-confirm-title">
+          <DeleteConfirmDialog
+            project={deletingProject}
+            onConfirm={handleDeleteConfirm}
+            onCancel={closeDeleteDialog}
           />
         </Modal>
       )}

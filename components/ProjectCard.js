@@ -10,7 +10,7 @@ function formatDate(isoDate) {
   });
 }
 
-export default function ProjectCard({ project, onEdit }) {
+export default function ProjectCard({ project, onEdit, onDelete }) {
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
       <p className="text-lg font-bold text-slate-900">{project.clientName}</p>
@@ -23,13 +23,22 @@ export default function ProjectCard({ project, onEdit }) {
         <p className="text-xs text-slate-500">
           Due {formatDate(project.dueDate)}
         </p>
-        <button
-          type="button"
-          onClick={() => onEdit(project)}
-          className="text-xs font-medium text-teal-700 hover:underline"
-        >
-          Edit
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => onEdit(project)}
+            className="text-xs font-medium text-teal-700 hover:underline"
+          >
+            Edit
+          </button>
+          <button
+            type="button"
+            onClick={() => onDelete(project)}
+            className="text-xs font-medium text-slate-500 hover:text-red-600 hover:underline"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );
