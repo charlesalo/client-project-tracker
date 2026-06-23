@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { validateProject } from "@/lib/validateProject";
-
-const STATUS_OPTIONS = ["Planning", "In Progress", "On Hold", "Completed"];
-const PRIORITY_OPTIONS = ["Low", "Medium", "High"];
+import {
+  validateProject,
+  VALID_STATUSES,
+  VALID_PRIORITIES,
+} from "@/lib/validateProject";
 
 function buildInitialState(project) {
   return {
@@ -110,7 +111,7 @@ export default function ProjectForm({ project, onSubmit, onCancel }) {
             onChange={handleChange("status")}
             className={inputClass(errors.status)}
           >
-            {STATUS_OPTIONS.map((option) => (
+            {VALID_STATUSES.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -125,7 +126,7 @@ export default function ProjectForm({ project, onSubmit, onCancel }) {
             onChange={handleChange("priority")}
             className={inputClass(errors.priority)}
           >
-            {PRIORITY_OPTIONS.map((option) => (
+            {VALID_PRIORITIES.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
