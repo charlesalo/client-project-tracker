@@ -10,7 +10,7 @@ import Modal from "@/components/Modal";
 import ProjectForm from "@/components/ProjectForm";
 import DeleteConfirmDialog from "@/components/DeleteConfirmDialog";
 import { getProjects, saveProjects } from "@/lib/storage";
-import { VALID_STATUSES, VALID_PRIORITIES } from "@/lib/validateProject";
+import { VALID_PRIORITIES } from "@/lib/validateProject";
 import seedData from "@/data/test_data.json";
 
 export default function Home() {
@@ -141,7 +141,11 @@ export default function Home() {
 
       {status === "ready" && (
         <div className="mt-4">
-          <DashboardSummary projects={projects} />
+          <DashboardSummary
+            projects={projects}
+            activeStatus={statusFilter}
+            onStatusClick={setStatusFilter}
+          />
         </div>
       )}
 
@@ -154,18 +158,6 @@ export default function Home() {
             placeholder="Search by client or project name…"
             className="min-w-[200px] flex-1 rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-            className="rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-teal-500"
-          >
-            <option value="All">All Statuses</option>
-            {VALID_STATUSES.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
