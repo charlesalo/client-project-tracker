@@ -1,4 +1,4 @@
-const STATUS_STYLES = {
+export const STATUS_STYLES = {
   Planning: "bg-slate-100 text-slate-700",
   "In Progress": "bg-teal-100 text-teal-700",
   "On Hold": "bg-amber-100 text-amber-700",

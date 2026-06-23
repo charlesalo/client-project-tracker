@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import ProjectList from "@/components/ProjectList";
+import DashboardSummary from "@/components/DashboardSummary";
 import LoadingState from "@/components/LoadingState";
 import EmptyState from "@/components/EmptyState";
 import ErrorState from "@/components/ErrorState";
@@ -137,6 +138,12 @@ export default function Home() {
           </button>
         )}
       </div>
+
+      {status === "ready" && (
+        <div className="mt-4">
+          <DashboardSummary projects={projects} />
+        </div>
+      )}
 
       {status === "ready" && (
         <div className="mt-4 flex flex-wrap items-center gap-3">
